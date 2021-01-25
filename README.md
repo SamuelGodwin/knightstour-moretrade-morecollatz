@@ -2,8 +2,6 @@
 
 In this coursework you will be working on writing C++ code that follows the functional programming style you have been introduced to in Scala.
 
-The main part is worth 6 marks, and is due in *Thursday the 7th of December at 11pm*.  Part (b), the advanced part, is worth 4 marks and is due in *Thursday the 21st of December at 11pm*.  Note you are *strongly encouraged* to begin the advanced part well before the end of term, to ensure you have the opportunity to ask any questions you may have about the work.
-
 # Important note
 
 Because this work is asking you to write code in a functional programming style, then unless a part of a question specifically says otherwise, I do not want you to write loops in a standard imperative programming style.  That is, the following are all forbidden:
@@ -64,9 +62,7 @@ std::transform(numbers.begin(), numbers.end(),
 
 ... as the lambda is changing the value of the variable x.  (In Scala terms: like a `var`, x is mutable.)
 
-A mark of zero will be awarded for any parts of questions breaking this rule.
-
-# a) Knight's Tour [6 marks]
+# a) Knight's Tour
 
 ## Background
 
@@ -148,7 +144,7 @@ To test your code, compile and run `TestKnights.cpp`.  This uses `first_tour` to
 
 # b) Earlier assignments, reloaded
 
-## Trade [2 marks]
+## Trade
 
 The price of a given commodity, can be represented by a vector of prices.  For instance:
 
@@ -162,7 +158,7 @@ In `Trade.h` define a template function `bestProfit` that takes two iterators, d
 
 To test your code, compile and run `TestTrade.cpp`.
 
-## Collatz [2 marks]
+## Collatz
 
 In the file collatz.h, complete the definition of the function `collatz` to meet the specification of the equivalent function in assignment 6.  The outline function given is:
 
