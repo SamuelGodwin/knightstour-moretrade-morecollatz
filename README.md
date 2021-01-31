@@ -125,7 +125,7 @@ The return type of `first_tour` is `pair<Path,bool>`.  If the `bool` is true, th
 
 To test this code, compile and run `TestKnights.cpp`.  This uses `first_tour` to look for tour on boards of size 1 to 8.  If a tour is found, it prints out the resulting board.
 
-# b) Earlier work, reloaded
+# Earlier stuff, reloaded
 
 ## Trade
 
