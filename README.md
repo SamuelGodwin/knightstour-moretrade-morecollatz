@@ -1,18 +1,18 @@
 # C++ meets Scala
 
-In this coursework you will be working on writing C++ code that follows the functional programming style you have been introduced to in Scala.
+In this work I will be working on writing C++ code that follows the functional programming style I have been introduced to in Scala.
 
 # Important note
 
-Because this work is asking you to write code in a functional programming style, then unless a part of a question specifically says otherwise, I do not want you to write loops in a standard imperative programming style.  That is, the following are all forbidden:
+Because this work is to write code in a functional programming style, no loops in a standard imperative programming style. That is, the following are all forbidden:
 
 - `for`, `while`, `do..while`
 - The `for_each` function in the `<algorithm>` header file
 - Anything that fakes one of the above (e.g. a combination of `if` and `goto`)
 
-It is expected, instead, that you will use the `<algorithm>` or `<numeric>` functions such as those discussed in the lecture.
+Instead, I will use `<algorithm>` or `<numeric>` functions.
 
-Moreover, if you are using a lambda that captures variables, then do not capture by reference, unless it is a reference to something const.  This is the same as the 'no var' rule in Scala -- lambda functions should not have side effects.
+Moreover, if using a lambda that captures variables, I do not capture by reference, unless it is a reference to something const.  This is the same as the 'no var' rule in Scala -- lambda functions should not have side effects.
 
 Capturing by value is always okay, e.g:
 
@@ -62,7 +62,7 @@ std::transform(numbers.begin(), numbers.end(),
 
 ... as the lambda is changing the value of the variable x.  (In Scala terms: like a `var`, x is mutable.)
 
-# a) Knight's Tour
+# Knight's Tour
 
 ## Background
 
@@ -87,91 +87,64 @@ To recap, knights in chess move in an L shape: two steps in one direction, then 
 `7...2`  
 `.8.1.`
 
-## Given code
-
-You should complete all your work in the file `knights.h`.  This contains the code:
+The file `knights.h` contains the code:
 
 `typedef vector<pair<int,int> > Path;`
 
-A typedef is a type definition: from this line onwards, if we write `Path` this is the same as writing `vector<pair<int,int> >`.  But, it saves typing, and is clear what the variable represents.
-
-A `Path` is a sequence of pairs of row and column positions, giving the order in which the squares on the board should be visited.  Your code will be searching for a `Path` that is a tour: for a chess board of size *n* the Path should be of length *n x n*, should visit every square on the board only once, and all the moves should follow the rules of how a knight moves.
-
-Also provided is the following snippet:
-
-```c++
-pair<int,int> operator+(const pair<int,int> & a, const pair<int,int> & b) {
-    return make_pair(a.first + b.first, a.second + b.second);
-}
-```
-
-This allows two pairs of ints to be added together using `+`.
+A `Path` is a sequence of pairs of row and column positions, giving the order in which the squares on the board should be visited. My code will be searching for a `Path` that is a tour: for a chess board of size *n* the Path should be of length *n x n*, should visit every square on the board only once, and all the moves should follow the rules of how a knight moves.
 
 ## A `moves` function
 
-Implement a function `moves` that takes a `pair<int,int>` representing a position on the board, and returns a `vector` containing all the positions that could be reached from there.  These should be in anti-clockwise order, starting at 6 o'clock.  For the example moves above, they would be added to the vector in the order shown (1 to 8).
-
+The function `moves` takes a `pair<int,int>` representing a position on the board, and returns a `vector` containing all the positions that could be reached from there.  These are in anti-clockwise order, starting at 6 o'clock.  For the example moves above, they would be added to the vector in the order shown (1 to 8).
 
 ## A `legal_moves` function
 
-Implement a function `legal_moves` that takes:
+The function `legal_moves` takes:
 
 - The size of the board (an integer, e.g. 8 for an 8x8 board)
 - A Path
 - A `pair<int,int>` representing a position on the board
 
-This should use your `moves` function to find all the squares that can be reached from the given position, and then return a `vector` containing only those that are legal, i.e:
+This uses my `moves` function to find all the squares that can be reached from the given position, and returns a `vector` containing only those that are legal, i.e:
 
 - The square is inside the board (no negative positions, does not equal or exceed the board size)
 - The square is not in the given Path
 
 ## Finding the first tour
 
-*NB This is the only place in the coursework you can use an imperative for loop.  It can be done without using a for loop, but it's a bit of a hack.*
-
-Implement a function `first_tour` that takes:
+The function `first_tour` takes:
 
 - The size of the board (an integer, e.g. 8 for an 8x8 board)
 - A Path
 
-...and searches recursively for an open tour.  You should use your `legal_moves` function here; recursion can stops when a tour has been found.
+...and searches recursively for an open tour.
 
-The return type of `first_tour` should be `pair<Path,bool>`.  If the `bool` is true, the `Path` is a valid tour.  If a valid tour cannot be found, return a pair of an empty Path, and false.
+The return type of `first_tour` is `pair<Path,bool>`.  If the `bool` is true, the `Path` is a valid tour.  If a valid tour cannot be found, return a pair of an empty Path, and false.
 
-## Testing your code
+## Usage
 
-To test your code, compile and run `TestKnights.cpp`.  This uses `first_tour` to look for tour on boards of size 1 to 8.  If a tour is found, it prints out the resulting board.
+To test this code, compile and run `TestKnights.cpp`.  This uses `first_tour` to look for tour on boards of size 1 to 8.  If a tour is found, it prints out the resulting board.
 
-# b) Earlier assignments, reloaded
+# b) Earlier work, reloaded
 
 ## Trade
 
-The price of a given commodity, can be represented by a vector of prices.  For instance:
+In `Trade.h` the template function `bestProfit` takes two iterators, denoting the begin() and end() of a range of prices, and returns an integer denoting the *best profit* that could be made.
 
-`vector<int> prices {28, 18, 20, 26, 24};`  
+## Usage
 
-To maximise profit, we would want to buy low and sell high -- in this case, buy at time 1 (when the cost is 18), sell at time 3 (when the cost is 26).
-
-In `Trade.h` define a template function `bestProfit` that takes two iterators, denoting the begin() and end() of a range of prices, and returns an integer denoting the *best profit* that could be made (for the example above: 8).
-
-*Note: as with part (a), imperative loops are forbidden, and you must not write any functions other than `bestProfit`, as specified here.*
-
-To test your code, compile and run `TestTrade.cpp`.
+To test this code, compile and run `TestTrade.cpp`.
 
 ## Collatz
 
-In the file collatz.h, complete the definition of the function `collatz` to meet the specification of the equivalent function in assignment 6.  The outline function given is:
+In the file collatz.h is the definition of the function `collatz`.
 
-```c++
-uint64_t collatz(uint64_t n) {
-    // TODO: your code goes here
-}
-```
+The type `uint64_t` is an unsigned 64-bit integer.  This is used here instead of the standard `int` type, as the numbers get quite big (just like `Long` is used in Scala.)
 
-The type `uint64_t` is an unsigned 64-bit integer.  This is used here instead of the standard `int` type, as the numbers get quite big (just like `Long` was used in Scala.)
+The function `collatz_max` takes an upper-bound `bound` and returns a pair, where the first element is the length of the longest collatz sequence found for numbers in the range *1..bound*, and the second element is the number that had that collatz sequence.
 
-Next, complete the definition of the function `collatz_max` to meet the specification of the equivalent function in assignment 6.  It takes an upper-bound `bound` and returns a pair, where the first element is the length of the longest collatz sequence found for numbers in the range *1..bound*, and the second element is the number that had that collatz sequence.
+## Usage
 
-To perform tests on your code, compile and run `TestCollatz.cpp`.
+To perform tests on this code, compile and run `TestCollatz.cpp`.
 
-*Hint: `transform_reduce` is your friend here.  If you do use `transform_reduce`, then once your code is working, just for your own curiosity, try adding `-fopenmp` as an extra argument to the compiler.  This will use the multi-core version of `transform_reduce` -- you should notice the tests complete much faster.*
+*Note: `transform_reduce` is your friend here.  If using `transform_reduce`, try adding `-fopenmp` as an extra argument to the compiler.  This will use the multi-core version of `transform_reduce` -- you should notice the tests complete much faster.*
